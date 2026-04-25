@@ -12,13 +12,26 @@ YEAR_END   <- 2020                                                    # Last yea
 K_MIN      <- 2                                                       # Minimum clusters to evaluate
 K_MAX      <- 7                                                       # Maximum clusters to evaluate
 N_ITER     <- 50                                                      # Maximum iterations per run
-N_START    <- 10                                                      # Number of random initializations
+N_START    <- 50                                                    # Number of random initializations
 SEED       <- NULL                                                    # NULL = random | number = reproducible
 FILE_PATH  <- "C:/Users/Usuario/mi-proyecto-ml/Dataset_Train_A2v5.xlsx"  # ← YOUR FILE PATH
 SHEET_NAME <- "TrainSet_13-22"                                        # Sheet name
 
 # =============================================================================
 
+# ── EXPERIMENT LOG ────────────────────────────────────────────────────────────
+# Accumulates results across runs — do not reset this between runs
+
+if (!exists("experiments")) {
+  experiments <- data.frame(
+    run       = integer(),
+    N_ITER    = integer(),
+    N_START   = integer(),
+    iter_used = integer(),
+    best_k    = integer(),
+    silhouette = numeric()
+  )
+}
 
 # ── 1. PACKAGES ───────────────────────────────────────────────────────────────
 
@@ -181,6 +194,18 @@ cat("🔄 Final model: k =", best_k_sil, "(selected by Silhouette)\n")
 cat("📈 Final silhouette score:", round(sil_score, 4), "\n")
 cat("   Iterations used:", km_final$iter, "/", N_ITER, "\n\n")
 
+# Log this run
+experiments <- rbind(experiments, data.frame(
+  run        = nrow(experiments) + 1,
+  N_ITER     = N_ITER,
+  N_START    = N_START,
+  iter_used  = km_final$iter,
+  best_k     = best_k_sil,
+  silhouette = round(sil_score, 4)
+))
+
+cat("\n=== EXPERIMENT LOG (all runs this session) ===\n")
+print(experiments)
 
 # ── 10. RESULTS: WHICH SA2 BELONGS TO WHICH CLUSTER ──────────────────────────
 
@@ -262,11 +287,14 @@ ggsave("kmeans_map.png", p_map, width = 9, height = 7, dpi = 130)
 
 # ── 14. EXPORT CSV FOR POWER BI ───────────────────────────────────────────────
 
+
 result_export <- sa2_avg %>%
   select(SA2, LONGITUDE, LATITUDE, cluster) %>%
   arrange(cluster, SA2)
 
 write.csv(result_export, "SA2_clusters_R.csv", row.names = FALSE)
+write.csv(experiments, "experiment_log.csv", row.names = FALSE)
+cat("   • experiment_log.csv          — Parameter combinations tested\n")
 
 cat("\n=======================================================\n")
 cat("✅ Files generated:\n")
@@ -274,4 +302,5 @@ cat("   • kmeans_evaluation.png        — Elbow + Silhouette curves\n")
 cat("   • kmeans_silhouette_detail.png — Silhouette width per SA2\n")
 cat("   • kmeans_map.png               — Geographic cluster map\n")
 cat("   • SA2_clusters_R.csv           — Ready to import into Power BI\n")
+cat("   • experiment_log.csv           — Parameter combinations tested\n")
 cat("=======================================================\n")
