@@ -43,15 +43,14 @@ library(dplyr)
 clean_dataset <- function(df) {
   df %>%
     select(
-      -station_code, -station_name, -LONGITUDE, -LATITUDE,
-      -MyCode, -ABARES_region,       # SA2 is no longer removed
+      -any_of(c("station_code", "station_name", "LONGITUDE", "LATITUDE", "SA2",
+                "MyCode", "ABARES_region", "YEAR")),
       -starts_with("SoilTemp"),
       -`Wheat area sown (ha)`,
       -`Wheat receipts ($)`,
       -`Wheat sold (t)`
     ) %>%
-    filter(!is.na(`Wheat produced (t)`)) %>%
-    mutate(SA2 = as.factor(SA2))     # ← Convert SA2 to factor (categorical)
+    filter(!is.na(`Wheat produced (t)`))
 }
 
 
@@ -144,8 +143,8 @@ rpart.plot(
 # We ask the model to predict wheat production for the TEST rows
 # (years 2023-2026 that the model has NEVER seen before).
 
-predictions <- predict(dt_fit, new_data = test_data) %>%
-  bind_cols(test_data %>% select(`Wheat produced (t)`, YEAR))
+results <- predict(dt_fit, new_data = test_data) %>%
+  bind_cols(test_data %>% select(`Wheat produced (t)`, any_of("YEAR")))
 
 # See predictions side by side with the real values:
 predictions %>%
