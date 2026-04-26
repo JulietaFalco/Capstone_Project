@@ -14,7 +14,7 @@ K_MAX      <- 7                                                       # Maximum 
 N_ITER     <- 50                                                      # Maximum iterations per run
 N_START    <- 50                                                    # Number of random initializations
 SEED       <- NULL                                                    # NULL = random | number = reproducible
-FILE_PATH  <- "C:/Users/Usuario/mi-proyecto-ml/Dataset_Train_A2v5.xlsx"  # ← YOUR FILE PATH
+FILE_PATH  <- "C:/Users/Usuario/mi-proyecto-ml/Dataset_Train_A2v6.xlsx"  # ← YOUR FILE PATH
 SHEET_NAME <- "TrainSet_13-22"                                        # Sheet name
 
 # =============================================================================

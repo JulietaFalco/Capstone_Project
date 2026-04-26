@@ -34,8 +34,8 @@ for (pkg in required_packages) {
 
 # ── 2. LOAD AND FILTER DATA ───────────────────────────────────────────────────
 
-cat("📂 Loading file:", "C:/Users/Usuario/mi-proyecto-ml/Dataset_Train_A2v4.xlsx", "\n")
-df_raw <- read_excel("C:/Users/Usuario/mi-proyecto-ml/Dataset_Train_A2v4.xlsx", sheet = SHEET_NAME)
+cat("📂 Loading file:", "C:/Users/Usuario/mi-proyecto-ml/Dataset_Train_A2v5.xlsx", "\n")
+df_raw <- read_excel("C:/Users/Usuario/mi-proyecto-ml/Dataset_Train_A2v5.xlsx", sheet = SHEET_NAME)
 
 cat("   Total rows:", nrow(df_raw), "| Years available:",
     paste(sort(unique(df_raw$YEAR)), collapse = ", "), "\n")
