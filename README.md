@@ -1,8 +1,8 @@
-﻿# Fertilizer Demand Forecasting – ML Models (Australia)
+﻿# Wheat Production Forecasting – ML Models (Australia)
 
 This project builds and evaluates machine learning models to forecast teh average wheat production per business in WA farming areas, using climatic, geographical and economic variables as predictors.
 
-The **target variable** is: **Average Production per Business** (tonnes).
+The **target variable** is: **Average Wheat Production per Business** (tonnes).
 
 Models implemented: **Linear Regression**, **LASSO**, **Decision Tree**, and **Random Forest**.
 
