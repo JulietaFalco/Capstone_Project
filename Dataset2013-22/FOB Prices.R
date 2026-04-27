@@ -18,7 +18,7 @@ trigo_fob <- trigo_raw %>%
   filter(!is.na(date), !is.na(trigo)) %>%
   mutate(date  = as.Date(paste0(date, "-01"), format = "%YM%m-%d"),
          trigo = as.numeric(trigo)) %>%
-  filter(date >= as.Date("2012-01-01"))
+  filter(date >= as.Date("2001-01-01"))
 
 ggplot(trigo_fob, aes(x = date, y = trigo)) +
   geom_line(color = "goldenrod3", linewidth = 1) +
@@ -32,7 +32,7 @@ ggplot(trigo_fob, aes(x = date, y = trigo)) +
   ) +
   theme_minimal()
 
-write.csv(trigo_fob, "precio_fob_trigo_2012.csv", row.names = FALSE)
+write.csv(trigo_fob, "precio_fob_trigo_2001.csv", row.names = FALSE)
 
 install.packages("tidyquant")
 library(tidyquant)
@@ -52,7 +52,7 @@ library(ggplot2)
 library(tidyquant)
 
 audusd <- tq_get("AUDUSD=X",
-                 from = "2012-01-01",
+                 from = "2001-01-01",
                  to   = Sys.Date(),
                  get  = "stock.prices")
 
