@@ -25,7 +25,7 @@ cat("✓ Trigo guardado\n")
 
 # ── AUD/USD ──────────────────────────────────
 audusd <- tq_get("AUDUSD=X",
-                 from = "2012-01-01",
+                 from = "2004-01-01",
                  to   = Sys.Date(),
                  get  = "stock.prices") %>%
   select(date, audusd = close)

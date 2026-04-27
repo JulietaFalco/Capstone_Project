@@ -29,8 +29,8 @@ This model forecasts average wheat production per business in WA farming areas u
 
 | Set | Years | Rows |
 |---|---|---|
-| Train | 2005 – 2017 | ~70% |
-| Test | 2018 – 2024 | ~30% |
+| Train | 2005 – 2017 | ~80% |
+| Test | 2018 – 2024 | ~20% |
 
 > Temporal split was used instead of random split to reflect real forecasting conditions.
 
