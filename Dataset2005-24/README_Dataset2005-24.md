@@ -144,7 +144,7 @@ Features selected by ALL 4 models (Linear Regression, LASSO, Decision Tree, Rand
 
 1. **LATITUDE is the strongest and most consistent predictor** across all models
 2. **Temperature variables** (AirTempAvg) are the most informative climate features
-3. **Rainfall shows weak correlation** with production — consistent with Steve's insight that farmer decisions are based on expected rainfall (lag), not actual rainfall
+3. **Rainfall shows weak correlation** with production — farmer decisions are based on expected rainfall (lag), not actual rainfall
 4. **Rainfall lag variables** are important for Random Forest but not for Decision Tree or LASSO
 5. **Fertiliser (Nitrogen) price** has a small positive effect — higher prices correlate with higher production years (likely reverse causality: low supply years drive both high prices and high demand)
 6. **Best model: Decision Tree** with Geo+AirTemp+Wind features (Test R²=0.747)
